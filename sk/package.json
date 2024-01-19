@@ -1,0 +1,23 @@
+{
+  "name": "sk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.1.7",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "grapheme-splitter": "^1.0.4",
+    "leven": "^3.1.0",
+    "mongoose": "^8.1.0",
+    "nanoid": "^3.1.20",
+    "nodemon": "^3.0.3",
+    "socket.io": "^3.1.0"
+  }
+}

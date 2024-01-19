@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN PAGE</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Island+Moments&family=Oswald&family=Playpen+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+</head>
+<style>
+    .contact {
+        text-decoration: underline;
+        text-decoration-color: white;
+        text-decoration-thickness: 3px;
+    }
+
+    .error {
+        color: red;
+        margin-left: 7vw;
+    }
+
+    #registrationForm {
+        margin-top: 2vw;
+    }
+
+    #registrationForm label {
+        margin-left: 7vw;
+    }
+
+    #registrationForm input {
+        margin-left: 7vw;
+        width: 50%;
+        height: 1.5rem;
+    }
+    #registrationForm input:focus{
+        outline: 0;
+    }
+
+
+    #btn{
+        background-color: rgba(71, 71, 236, 0.938);
+        border: 2px solid rgba(71, 71, 236, 0.938);
+        width: 10vw;
+        height: 5vh;
+        margin-left: 9.5vw;
+        border-radius: 20px;
+        margin-top: 2vh;
+        color: white;
+        
+    }
+   
+</style>
+
+<body>
+    <%- include('partials/navbar') %>
+        <div class="vid">
+            <video src="./images/ogbg.mp4" class="vid" autoplay loop></video>
+        </div>
+        <div class="contbox">
+            <h1 class="top">Register</h1>
+            <img src="./images/logoweb.jpg" alt="loog" class="clogo">
+            <h1>SKETCH IT!! GUESS IT!!</h1>
+            <a href="login" class="underneath"> Already have an account?Login</a>
+
+            <form id="registrationForm" action="/register" method="post">
+                <label for="username">Username</label><br>
+                <input type="text" id="username" name="username" required><br>
+                <span id="usernameError" class="error"></span><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br>
+                <span id="passwordError" class="error"></span><br>
+
+                <label for="confirmPassword">Confirm Password:</label><br>
+                <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+                <span id="confirmPasswordError" class="error"></span><br>
+
+                
+                <button type="submit" id="btn">Register</button>
+            </form>
+            
+        </div>
+
+
+        <script>
+            document.getElementById("registrationForm").addEventListener("submit", function (event) {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+
+                var usernameError = document.getElementById("usernameError");
+                var passwordError = document.getElementById("passwordError");
+                var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+                // Reset previous errors
+                usernameError.textContent = "";
+                passwordError.textContent = "";
+                confirmPasswordError.textContent = "";
+
+                // Validate username
+                if (username.length < 5) {
+                    usernameError.textContent = "Username must be at least 5 characters";
+                    event.preventDefault();
+                }
+
+                // Validate password
+                if (password.length < 8) {
+                    passwordError.textContent = "Password must be at least 8 characters";
+                    event.preventDefault();
+                }
+
+                // Validate confirm password
+                if (confirmPassword !== password) {
+                    confirmPasswordError.textContent = "Passwords do not match";
+                    event.preventDefault();
+                }
+            });
+        </script>
+</body>
+
+</html>
