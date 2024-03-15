@@ -24,6 +24,18 @@ app.get("/register",(req , res)=>(
     res.render("register")
 ))
 
+app.get("/category",(req , res)=>(
+    res.render("category")
+))
+app.get("/anime",(req , res)=>(
+    res.render("anime")
+))
+app.get("/Marvel",(req , res)=>(
+    res.render("Marvel")
+))
+app.get("/Cartoon",(req , res)=>(
+    res.render("Cartoon")
+))
 app.post("/register",async (req,res)=>{
     const data ={
         username:req.body.username,

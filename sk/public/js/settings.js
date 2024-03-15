@@ -39,27 +39,40 @@ function updateSettings(e) {
         language: document.querySelector('#language').value,
     });
 }
-
-function putPlayer(player) {
+function putPlayer(player, profileImage) {
     const div = document.createElement('div');
     const img = document.createElement('img');
     const p = document.createElement('p');
     const text = document.createTextNode(player.name);
     div.id = `skribblr-${player.id}`;
+
     p.appendChild(text);
     p.classList.add('text-center');
-    img.src = player.avatar;
+
+    // Set profile image
+    if (profileImage) {
+        img.src = profileImage;
+    } else {
+        // Default image if not provided
+        img.src = './images/profile.png'; // Provide the path to your default profile image
+    }
     img.alt = player.name;
     img.classList.add('img-fluid', 'rounded-circle');
+
     div.classList.add('col-4', 'col-sm-3', 'col-md-4', 'col-lg-3');
-    img.onload = async () => {
-        div.appendChild(img);
-        div.appendChild(p);
-        document.querySelector('#playersDiv').appendChild(div);
-        pop.play();
-        await animateCSS(div, 'fadeInDown', false);
-    };
+
+    div.appendChild(img);
+    div.appendChild(p);
+
+    document.querySelector('#playersDiv').appendChild(div);
+
+    pop.play(); // Assuming pop is defined somewhere
+    animateCSS(div, 'fadeInDown', false); // Assuming animateCSS is defined somewhere
 }
+
+
+
+
 
 function showCanvasArea() {
     const sketchpad = document.createElement('script');

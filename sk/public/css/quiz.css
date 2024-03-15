@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: url(../images/riddlereels_web_games_zoom_hero.webp) center / cover no-repeat;
+}
+
+header {
+  background-color: #f7f3f32b;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  font-size: 20px;
+}
+
+.category-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5rem;
+  margin-top: 110px;
+}
+
+.category {
+  flex-basis: 20%; /* Ensure equal width for four boxes */
+  height: 200px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.category:hover {
+  transform: scale(1.05);
+}
+
+.category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h2 {
+  margin-top: 500px;
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+/* .k-drama {
+  top: 20px;
+  left: 23%;
+  right: 0;
+} */
+
+.marvel{
+  top: 20px;
+  left: 17%;
+}
+
+.cartoon{
+  top: 20px;
+  left: 46%;
+}
+
+.anime {
+  top: 20px;
+  left: 77%;
+}

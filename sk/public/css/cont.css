@@ -1,20 +1,16 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: Bitter ;
 }
 .contbox{
-    width: 30vw;
-    height: 80vh;
+    width: 450px;
+    height: 540px;
     background-color: rgba(255, 255, 255, 0.443);
     margin-left: 35vw;
-    margin-top: 5vh;
+    margin-top: 10vh;
     border-radius: 20px;
-    /* display: flex;
-    justify-content: center; */
-    padding-top: 5px;
-    font-family: Bitter ;
-    
-    
+    padding-top: 5px;   
 }
 h1{
     text-align: center;
@@ -31,39 +27,21 @@ h1{
    height: 80px; 
    border-radius: 80px;
    margin-top: 10px;
-   margin-left: 190px;
+   margin-left: 180px;
 }
 
-.underneath{
+.underneath {
     font-size: large;
     text-decoration: underline;
-    text-align: center;
-  
+    margin-left: 110px; 
 }
-.email{
+
+
+
+.sbtn{
     font-size: large;
-    margin-left: 100px;
-    margin-top: 30px;
-}
-.email input{
-    width:250px;
-    height: 2rem;
-}
-.query{
-    font-size: large;
-    margin-left: 100px;
-    margin-top: 10px;
-}
-/* .query input{
-    width:250px;
-    height: 2rem;
-    padding-bottom: 50px;
-    position: relative;
-} */
-.submit{
-    font-size: large;
-    margin-left: 180px;
-    margin-top: 10px;
+    margin-left: 11vw;
+    margin-top: 5vh;
     padding: 10px 20px 10px 20px;
     background-color: rgba(71, 71, 236, 0.938);
     border: 2px solid rgba(71, 71, 236, 0.938);
@@ -71,8 +49,41 @@ h1{
 
 } 
 
-.submit a{
+.sbtn a{
 
     text-decoration: none;
     color: white;
 }
+.form-control{
+
+    margin-left: 5.5vw;
+    margin-top:2vh;
+}
+.form-control input{
+    width: 250px;
+    height: 30px;
+}
+.form-control input:focus{
+  outline: 0;
+}
+.form-control .span{
+    color: red;
+    visibility: visible;
+
+}
+.form-control.error span{
+    color: red;
+    visibility: visible;
+
+}
+
+.form-control.error input{
+
+    border: 1px solid red ;
+}
+.form-control.success input{
+    border-color: greenyellow;
+}
+
+
+

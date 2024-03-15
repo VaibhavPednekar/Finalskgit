@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reel & Riddles</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-image: url('./images/ogbg.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    /* Navbar Styles */
+    nav {
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
+      height: 80px;
+    }
+
+    nav h2 {
+      margin: 0;
+      font-size: 35px;
+      font-weight: bold;
+      color: #fff;
+      margin-top: 20px;
+    }
+
+    #logout-btn {
+      background-color: yellow;
+      color: black;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 30px;
+    }
+
+    #logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    h1 {
+      color: #00796b;
+    }
+
+    #game-container {
+      width: 850px;
+      height: 500px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      margin-top: 150px;
+      float: left;
+      margin-left: 260px;
+    }
+
+
+    #game-image {
+      max-width: 100%;
+      height: auto;
+      max-height: 500px;
+      width: 650px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease-in-out;
+      margin-top: 20px;
+    }
+
+    #game-image:hover {
+      transform: scale(1.1);
+    }
+
+    .option-button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .option-button:hover {
+      background-color: #004d40;
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #eef2f2;
+      transition: color 0.3s ease-in-out;
+    }
+
+    #result:hover {
+      color: #004d40;
+      cursor: pointer;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 200px;
+      height: 500px;
+      background-color: #f0f0f0;
+      float: right;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 150px;
+      margin-right: 100px;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+    }
+
+    .timer {
+      margin-bottom: 20px;
+    }
+
+    .points {
+      margin-top: 20px;
+    }
+
+    .points ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .points ul li {
+      margin-bottom: 10px;
+    }
+
+    .points ul li span {
+      font-weight: bold;
+    }
+
+    .question-info {
+      margin-top: 20px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: none;
+      max-width: 400px; /* Adjust the maximum width here */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-height: 400px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer; /* Add cursor pointer */
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+    }
+
+    .modal-message {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .modal-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      margin-right: 10px;
+    }
+
+    .modal-restart {
+      background-color: #00796b;
+      color: white;
+    }
+
+    .modal-next-level {
+      background-color: #32a852;
+      color: white;
+    }
+
+    .modal-exit {
+      background-color: #ff5733;
+      color: white;
+    }
+
+    .modal-button:hover {
+      filter: brightness(0.9);
+    }
+
+    header {
+      background-color: #d8202072;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      height: 10px;
+      font-size: 20px;
+    }
+
+    h1{
+      margin-top:28px;
+      color: #fff;
+    }
+
+    #logout-btn {
+      position: absolute;
+      top: 30px;
+      right: 10px;
+      background-color:yellow;
+      color: black;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      height: 50px;
+      width: 80px;
+    }
+
+    #logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    #timer {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .emoji {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .emoji.sad {
+      color: red;
+    }
+
+    .emoji.happy {
+      color: green;
+    }
+    #logout-btn a{
+      text-decoration: none;
+      color:black;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav>
+    <h2>Emoti Quizz</h2>
+    <button id="logout-btn"><a href="/option">LOGOUT</a></button>
+  </nav>
+
+  <div class="sidebar">
+    <h2>Timer</h2>
+    <div class="timer" id="timer">Time Left: 10 seconds</div>
+    <div class="points" id="points">
+      <h3>Points</h3>
+      <ul>
+        <!-- Points for each question will be added dynamically -->
+      </ul>
+    </div>
+    <div class="question-info">
+      
+      <p>Question <span id="currentQuestionNumber">1</span> of <span id="totalQuestionsNumber">3</span></p>
+    </div>
+  </div>
+
+  <div id="game-container">
+    <img id="game-image" src="" alt="Game Image">
+    <br>
+    <button class="option-button" onclick="checkAnswer(0)"></button>
+    <button class="option-button" onclick="checkAnswer(1)"></button>
+    <button class="option-button" onclick="checkAnswer(2)"></button>
+    <button class="option-button" onclick="checkAnswer(3)"></button>
+    <br>
+    <p id="result"></p>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div id="gameOverModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('gameOverModal')">&times;</span>
+      <div class="emoji sad">&#128546;</div> <!-- Sad emoji -->
+      <p id="gameOverMessage" class="modal-message"></p>
+      <p id="gameOverPoints" class="modal-message"></p>
+      <button class="modal-button modal-restart" onclick="restartGame()">Restart Game</button>
+      <button class="modal-button modal-exit" onclick="exitGame()">Exit</button>
+    </div>
+  </div>
+
+  <!-- Game Won Modal -->
+  <div id="gameWonModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('gameWonModal')">&times;</span>
+      <div class="emoji happy">&#128512;</div> <!-- Happy emoji -->
+      <p id="gameWonMessage" class="modal-message"></p>
+      <p id="gameWonPoints" class="modal-message"></p>
+      <button class="modal-button modal-restart" onclick="restartGame()">Restart Game</button>
+      <!-- <button class="modal-button modal-next-level" onclick="nextLevel()">Next Level</button> -->
+      <button class="modal-button modal-exit" onclick="exitGame()">Exit</button>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+      {url: "pokemn.jpeg", options: ["Pokemon", "Kill la Kill", "Horimiya", "HunterXHunter"], answer: 0},
+      {url: "deathnote.jpeg", options: ["FireForce", "DeathNote", "Plunderer", "Psycho-Pass"], answer: 1},
+      {url: "onepunch.jpeg", options: ["OnePiece", "Devil'sLine", "OnePunch", "OnePunchMan"], answer: 3},
+      {url: "FairyTail.jpeg", options: ["Naruto", "Bleach", "FairyTail", "Iruma-kun"], answer: 2},
+      {url: "swordartonline.jpeg", options: ["NoGameNoLife", "SwordArtOnline", "Sololeveling", "Oregairu"], answer: 1}
+      // Add more image URLs, options, and answers as needed
+    ];
+
+    let currentImageIndex = 0;
+    let correctAnswers = 0;
+    let totalPoints = 0; // Variable to store total points
+    let currentQuestionNumber = 1; // Variable to store the current question number
+    const totalQuestionsNumber = images.length; // Total number of questions
+
+    function initializeGame() {
+      const gameImage = document.getElementById("game-image");
+      const optionButtons = document.querySelectorAll(".option-button");
+      const timerDisplay = document.getElementById("timer");
+      const pointsList = document.querySelector(".points ul");
+      const currentQuestionNumberElement = document.getElementById("currentQuestionNumber");
+      const totalQuestionsNumberElement = document.getElementById("totalQuestionsNumber");
+
+      if (currentImageIndex >= images.length) {
+        // All questions answered, show game won modal
+        showGameWonModal("Congratulations! You've won the game.");
+        return;
+      }
+
+      const currentImage = images[currentImageIndex];
+      gameImage.src = "images/" + currentImage.url;
+
+      // Populate option buttons
+      optionButtons.forEach((button, index) => {
+        button.textContent = currentImage.options[index];
+        button.style.backgroundColor = "#00796b"; // Reset button color
+        button.disabled = false; // Enable buttons
+      });
+
+      document.getElementById("result").innerHTML = "";
+
+      // Start the timer (adjust the time limit as needed, currently set to 10 seconds)
+      let timeLeft = 10;
+      timerDisplay.textContent = `Time Left: ${timeLeft} seconds`;
+
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time Left: ${timeLeft} seconds`;
+
+        if (timeLeft === 0) {
+          clearInterval(timer);
+          showGameOverModal("Time's up! Click here to restart.");
+        }
+      }, 1000);
+
+      // Update points list with current total points
+      updatePointsList(false); // Display points for the current question
+
+      // Update the current question number and total number of questions
+      currentQuestionNumberElement.textContent = currentQuestionNumber;
+      totalQuestionsNumberElement.textContent = totalQuestionsNumber;
+    }
+
+    function checkAnswer(selectedOptionIndex) {
+      clearInterval(timer); // Clear the timer
+
+      const correctAnswerIndex = images[currentImageIndex].answer;
+
+      const optionButtons = document.querySelectorAll(".option-button");
+
+      optionButtons.forEach((button, index) => {
+        if (index === correctAnswerIndex) {
+          button.style.backgroundColor = ""; // Remove background color
+        }
+        button.disabled = true; // Disable buttons after user selection
+      });
+
+      if (selectedOptionIndex === correctAnswerIndex) {
+        document.getElementById("result").innerHTML = "Correct!";
+        correctAnswers++;
+        updatePointsList(true);
+      } else {
+        showGameOverModal("Game Over. Click here to restart.");
+        return; // Do not proceed to the next question if the answer is incorrect
+      }
+
+      // Move to the next question
+      currentImageIndex++;
+      currentQuestionNumber++; // Increment the current question number
+      initializeGame();
+    }
+
+    function showGameOverModal(message) {
+      const modal = document.getElementById("gameOverModal");
+      modal.style.display = "block";
+      document.getElementById("gameOverMessage").innerHTML = message;
+
+      // Display points earned
+      document.getElementById("gameOverPoints").innerHTML = `Points: ${totalPoints}`;
+
+      // Display sad emoji if points are less than 200
+      if (totalPoints < 200) {
+        document.querySelector(".emoji.sad").style.display = "block";
+      } else {
+        document.querySelector(".emoji.sad").style.display = "none";
+      }
+    }
+
+    function showGameWonModal(message) {
+      const modal = document.getElementById("gameWonModal");
+      modal.style.display = "block";
+      document.getElementById("gameWonMessage").innerHTML = message;
+
+      // Display points earned
+      document.getElementById("gameWonPoints").innerHTML = `Points: ${totalPoints}`;
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.style.display = "none";
+    }
+
+    function restartGame() {
+      closeModal("gameOverModal");
+      closeModal("gameWonModal");
+      currentImageIndex = 0;
+      correctAnswers = 0;
+      totalPoints = 0;
+      currentQuestionNumber = 1; // Reset the current question number
+      initializeGame();
+    }
+
+    function exitGame() {
+      window.location.href = "./category"; // Redirect to the "./mlevel" page
+    }
+
+    // function nextLevel() {
+    //   window.location.href = "./mlevel2"; // Redirect to the "./mlevel2" page
+    // }
+
+    function updatePointsList(correct) {
+      const pointsList = document.querySelector(".points ul");
+
+      // Increase total points by 100 for each correct answer
+      if (correct) {
+        totalPoints += 100;
+      }
+
+      // Clear previous points list
+      pointsList.innerHTML = "";
+    }
+
+    // Load the first image when the page loads
+    window.onload = initializeGame;
+  </script>
+
+</body>
+</html>

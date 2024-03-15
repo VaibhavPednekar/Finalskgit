@@ -40,18 +40,74 @@
         <h1>SKETCH IT!! GUESS IT!!</h1>
         <p class="underneath">Feel Free to Contact Us !</p>
 
-        <div class="email">
-            <p>Enter your Email</p>
-            <input type="text" placeholder="Enter your email">
+        
+                    
+           <form class="form" id="form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="fa94d31e-02cb-4862-945b-a1cb12100969">
+            <input type="hidden" name="subject" value="New Submission from Web3Forms">
+           <input type="checkbox" name="botcheck" id="" style="display: none;">
+            <div class="form-control">
+                <label>Username</label><br>
+                <input type="text" placeholder="Your username"  id="username" name="username" required><br>
+                <div class="error"></div>
+            </div>
+            <div class="form-control">
+                <label>Email</label><br>
+                <input type="text" placeholder="Your Email ID" id="Email"  name="Email" required><br>
+                <div class="error"></div>
+            </div>
+    
+            <div class="form-control">
+                <label>Message</label><br>
+                <input placeholder="Your Message"  id="message" name="message"required />
+                <div class="error"></div>
+            </div>
+            
+           <button class="sbtn" id="button" value="button">Submit</button>
+           <div id="result"></div>
+            </form> 
         </div>
-
-        <div class="query">
-            <p>Enter your query</p>
-            <textarea name="Enter query" id="" cols="35" rows="10" placeholder="Enter query"></textarea>
-        </div>
-
-        <button class="submit"><a href="">Submit</a></button>
     </div>
+    <script>
+        const form = document.getElementById('form');
+    const result = document.getElementById('result');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+      result.innerHTML = "Please wait..."
+    
+        fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = json.message;
+                } else {
+                    console.log(response);
+                    result.innerHTML = json.message;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                result.innerHTML = "Something went wrong!";
+            })
+            .then(function() {
+                form.reset();
+                setTimeout(() => {
+                    result.style.display = "none";
+                }, 3000);
+            });
+    });
+    </script>
 
 </body>
 

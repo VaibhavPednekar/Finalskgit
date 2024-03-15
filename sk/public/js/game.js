@@ -46,27 +46,23 @@ function chooseWord(word) {
     document.querySelector('#wordDiv').append(p);
 }
 
+
+
 function createScoreCard(players) {
     players.forEach((player) => {
         const div = document.createElement('div');
-        const avatar = document.createElement('div');
         const details = document.createElement('div');
-        const img = document.createElement('img');
         const p1 = document.createElement('p');
         const p2 = document.createElement('p');
         const name = document.createTextNode(player.name);
         const score = document.createTextNode('Score: 0');
 
-        img.src = player.avatar;
-        img.classList.add('img-fluid', 'rounded-circle');
         div.classList.add('row', 'justify-content-end', 'py-1', 'align-items-center');
-        avatar.classList.add('col-5', 'col-xl-4');
-        details.classList.add('col-7', 'col-xl-6', 'text-center', 'my-auto');
+        details.classList.add('col-12', 'text-center', 'my-auto');
         p1.classList.add('mb-0');
         p2.classList.add('mb-0');
         div.id = `skribblr-${player.id}`;
-        div.append(details, avatar);
-        avatar.append(img);
+        div.append(details);
         details.append(p1, p2);
         p1.append(name);
         p2.append(score);
@@ -210,31 +206,26 @@ socket.on('endGame', async ({ stats }) => {
 
     players.forEach((playerID) => {
         const row = document.createElement('div');
-        const imgDiv = document.createElement('div');
         const nameDiv = document.createElement('div');
         const scoreDiv = document.createElement('div');
         const name = document.createElement('p');
         const score = document.createElement('p');
-        const avatar = new Image();
-
-        avatar.src = stats[playerID].avatar;
+    
         name.textContent = stats[playerID].name;
         score.textContent = stats[playerID].score;
-
+    
         row.classList.add('row', 'mx-0', 'align-items-center');
-        avatar.classList.add('img-fluid', 'rounded-circle');
-        imgDiv.classList.add('col-2', 'text-center');
-        nameDiv.classList.add('col-7', 'text-center');
+        nameDiv.classList.add('col-9', 'text-center'); // Adjusted width for the name to fit the layout
         scoreDiv.classList.add('col-3', 'text-center');
         name.classList.add('display-6', 'fw-normal', 'mb-0');
         score.classList.add('display-6', 'fw-normal', 'mb-0');
-
-        imgDiv.append(avatar);
+    
         nameDiv.append(name);
         scoreDiv.append(score);
-        row.append(imgDiv, nameDiv, scoreDiv);
+        row.append(nameDiv, scoreDiv);
         document.querySelector('#statsDiv').append(row, document.createElement('hr'));
     });
+    
     clock.stop();
     gameOver.play();
     document.querySelector('#gameEnded').classList.remove('d-none');
